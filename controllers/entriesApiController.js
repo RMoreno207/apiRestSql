@@ -6,21 +6,13 @@ const getEntries = async (req, res) => {
     if (req.query.email) {//Especificando un email
         entries = await entry.getEntriesByEmail(req.query.email);
     }
-    else {//sin especificar email
+    else {//si no especifica email
         entries = await entry.getAllEntries();
     }
     res.status(200).json(entries); // [] con las entries encontradas
 }
 
-//createEntry
 // POST http://localhost:3000/api/entries
-// let newEntry = {
-//     title:"noticia desde Node",
-//     content:"va a triunfar esto2",
-//     email:"alejandru@thebridgeschool.es",
-//     category:"sucesos"}
-
-// POST entry por email
 const createEntry = async (req, res) => {
     const newEntry = req.body; // {title,content,email,category}
     const response = await entry.createEntry(newEntry);
@@ -34,13 +26,13 @@ const createEntry = async (req, res) => {
 // modifica una entry por completo con nuevos datos y retorna 
 // un status 200. Buscar por título para editar entry.
 const updateEntry = async (req, res) => {
-    let title = req.params.title;
-    const newEntry = req.body; // {title,content,email,category}
-    const response = await entry.createEntry(newEntry);
     if (req.body.title) {
-        // llamar al modelo para actualizar
-        entry.updateEntry(req.body)
-    } (edited)
+        const response = await entry.updateEntry(req.body)
+        res.status(201).json({
+            "items_created": response,
+            data: newEntry
+        });
+    }
 }
 
 

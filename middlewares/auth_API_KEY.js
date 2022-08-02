@@ -1,11 +1,9 @@
-//http://localhost:3000/products?API_KEY="12354djd"
-
-const checkApiKey = function(req,res,next){
+const checkApiKey = function (req, res, next) {
     // Comprobar si existe API KEY en BBDD
     // ...
-    if(req.query.API_KEY==="123abc"){
+    if (req.query.API_KEY) {
         next(); // Pasa a la siguiente tarea
-    }else{
+    } else {
         //Mando mensaje de error
         res.status(401).send("Error. API KEY no proveída");
     }
